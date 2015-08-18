@@ -18,7 +18,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'password' => 'HiaPJIkbvs609drN',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
-            'vmList' => ['t135', 't136'],
+            'vmList' => ['t134', 't135'],
         ],
         '101' => [
             'id' => '101',
