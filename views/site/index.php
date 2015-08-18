@@ -1,4 +1,5 @@
 <?php
+use kartik\icons\Icon;
 
 $this->title = 'VMpanel';
 ?>
