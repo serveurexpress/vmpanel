@@ -52,7 +52,7 @@ class SiteController extends Controller {
             if ($vm != null && $action != null && $vm != "" && $action != "" && isset($vm) && isset($action)) {
                 if (in_array($vm, $vmlist)) {
                     switch ($action) {
-                        case 'play':
+                        case 'start':
                             \Yii::$app->getSession()->setFlash('success', 'VM lancée');
                             break;
                         case 'pause':
