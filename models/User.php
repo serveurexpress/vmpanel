@@ -9,6 +9,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+    public $vmList;
 
     private static $users = [
         '100' => [
@@ -17,6 +18,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'password' => 'HiaPJIkbvs609drN',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
+            'vmList' => '*',
         ],
         '101' => [
             'id' => '101',
@@ -24,6 +26,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'password' => 'b5mf07Hl5xmGML5o',
             'authKey' => 'test101key',
             'accessToken' => '101-token',
+            'vmList' => 't135',
         ],
     ];
 
