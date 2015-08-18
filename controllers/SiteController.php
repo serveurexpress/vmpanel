@@ -51,7 +51,7 @@ class SiteController extends Controller
     {
         if (!\Yii::$app->user->isGuest) {
             return $this->render('index', [
-                'user' => $app->user
+                'user' => \Yii::$app->user
             ]);
         }
 
