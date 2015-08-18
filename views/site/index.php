@@ -8,10 +8,16 @@ $this->title = 'VMpanel';
         <?php
         $result = "";
         foreach ($vmlist as &$vm) {
+            $status = shell_exec(Yii::$app->params['scriptDir'].'/status '.$vm);
+            if (trim($status) == 'running') {
+                $status = 'OK';
+            } else {
+                $status = 'KO';
+            }
             $result = '
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">'.ucfirst($vm).'</h3>
+                        <h3 class="panel-title">'.$status . ' '. ucfirst($vm).'</h3>
                     </div>
                     <div class="panel-body">
                         Les graphs ici

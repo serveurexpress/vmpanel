@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'support@serveur-express.com',
     'icon-framework' => 'fa',
+    'scriptDir' => '/home/kvm/',
 ];
