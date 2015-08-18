@@ -1,6 +1,6 @@
 <?php
-/* @var $this yii\web\View */
-
+use kartik\icons\Icon;
+Icon::map($this);
 $this->title = 'VMpanel';
 ?>
 <div class="site-index">
@@ -11,10 +11,13 @@ $this->title = 'VMpanel';
             $result = '
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">'.$vm.'</h3>
+                        <h3 class="panel-title">'.ucfirst($vm).'</h3>
                     </div>
                     <div class="panel-body">
-                        Panel content
+                        Les graphs ici
+                    </div>
+                    <div class="panel-footer">
+                        '.Icon::show('play').'
                     </div>
                 </div>';
             echo $result;
