@@ -19,11 +19,11 @@ $this->title = 'VMpanel';
                         Les graphs ici
                     </div>
                     <div class="panel-footer">
-                       <a href="#" class="btn btn-default">'.Icon::show('play').'</a>'
-                    . '<a href="#" class="btn btn-default">'.Icon::show('pause').'</a>'
-                    . '<a href="#" class="btn btn-default">'.Icon::show('stop').'</a>'
-                    . '<a href="#" class="btn btn-default">'.Icon::show('refresh').'</a>'
-                    . '<a href="#" class="btn btn-default">'.Icon::show('search').'</a>
+                       <a href="#" class="btn btn-default" title="Démarrer">'.Icon::show('play').'</a>'
+                    . '<a href="#" class="btn btn-default" title="Pause">'.Icon::show('pause').'</a>'
+                    . '<a href="#" class="btn btn-default" title="Arrêter">'.Icon::show('stop').'</a>'
+                    . '<a href="#" class="btn btn-default" title="Relancer">'.Icon::show('refresh').'</a>'
+                    . '<a href="#" class="btn btn-default" title="Fsck">'.Icon::show('search').'</a>
                     </div>
                 </div>';
             echo $result;
