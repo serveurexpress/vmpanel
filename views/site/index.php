@@ -1,23 +1,13 @@
 <?php
-
 /* @var $this yii\web\View */
 
 $this->title = 'VMpanel';
-\Yii::trace(\yii\helpers\ArrayHelper::toArray(Yii::$app->user->identity)); 
+$username = Yii::$app->user->identity->username;
+$vmlist = Yii::$app->user->identity->vmList;
 ?>
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Bienvenue</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
     <div class="body-content">
-
-        
+        <h1>Bienvenue <?= ucfirst($username) ?></h1>
 
     </div>
 </div>
