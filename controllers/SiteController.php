@@ -50,7 +50,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
-            return $this->render('index');
+            $vmlist = Yii::$app->user->identity->vmList;
+            return $this->render('index', [
+                'vmlist' => $vmlist,
+            ]);
         }
 
         $model = new LoginForm();
