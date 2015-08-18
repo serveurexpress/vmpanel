@@ -53,19 +53,19 @@ class SiteController extends Controller {
                 if (in_array($vm, $vmlist)) {
                     switch ($action) {
                         case 'start':
-                            \Yii::$app->getSession()->setFlash('success', 'VM lancée');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' lancée');
                             break;
                         case 'pause':
-                            \Yii::$app->getSession()->setFlash('success', 'VM en pause');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' en pause');
                             break;
                         case 'stop':
-                            \Yii::$app->getSession()->setFlash('success', 'VM arrêtée');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' arrêtée');
                             break;
                         case 'restart':
-                            \Yii::$app->getSession()->setFlash('success', 'VM relancée');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' relancée');
                             break;
                         case 'fsck':
-                            \Yii::$app->getSession()->setFlash('success', 'FSCK en cours');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' fsck lancée');
                             break;
                         default:
                             \Yii::$app->getSession()->setFlash('error', 'Action interdite !');
