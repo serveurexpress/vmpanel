@@ -3,11 +3,12 @@
 /* @var $this yii\web\View */
 
 $this->title = 'VMpanel';
+\Yii::trace(\yii\helpers\ArrayHelper::toArray($user)); 
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Bienvenue</h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
