@@ -17,7 +17,11 @@ $this->title = 'VMpanel';
                         Les graphs ici
                     </div>
                     <div class="panel-footer">
-                        '.Icon::show('play').'
+                       <a href="#" class="btn btn-default">'.Icon::show('play').'</a>'
+                    . '<a href="#" class="btn btn-default">'.Icon::show('pause').'</a>'
+                    . '<a href="#" class="btn btn-default">'.Icon::show('stop').'</a>'
+                    . '<a href="#" class="btn btn-default">'.Icon::show('refresh').'</a>'
+                    . '<a href="#" class="btn btn-default">'.Icon::show('search').'</a>
                     </div>
                 </div>';
             echo $result;
