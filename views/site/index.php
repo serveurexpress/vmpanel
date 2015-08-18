@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = 'VMpanel';
-\Yii::trace(\yii\helpers\ArrayHelper::toArray($user)); 
+\Yii::trace(\yii\helpers\ArrayHelper::toArray(Yii::$app->user->identity)); 
 ?>
 <div class="site-index">
 
