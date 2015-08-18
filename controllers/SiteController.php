@@ -9,10 +9,9 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
-{
-    public function behaviors()
-    {
+class SiteController extends Controller {
+
+    public function behaviors() {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -34,8 +33,7 @@ class SiteController extends Controller
         ];
     }
 
-    public function actions()
-    {
+    public function actions() {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -47,12 +45,37 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex()
-    {
+    public function actionIndex($vm = null, $action = null) {
         if (!\Yii::$app->user->isGuest) {
             $vmlist = Yii::$app->user->identity->vmList;
+
+            if ($vm != null && $action != null && $vm != "" && $action != "" && isset($vm) && isset($action)) {
+                if (in_array($vm, $vmlist)) {
+                    switch ($action) {
+                        case 'play':
+                            \Yii::$app->getSession()->setFlash('success', 'VM lancée');
+                            break;
+                        case 'pause':
+                            \Yii::$app->getSession()->setFlash('success', 'VM en pause');
+                            break;
+                        case 'stop':
+                            \Yii::$app->getSession()->setFlash('success', 'VM arrêtée');
+                            break;
+                        case 'restart':
+                            \Yii::$app->getSession()->setFlash('success', 'VM relancée');
+                            break;
+                        case 'fsck':
+                            \Yii::$app->getSession()->setFlash('success', 'FSCK en cours');
+                            break;
+                        default:
+                            \Yii::$app->getSession()->setFlash('error', 'Action interdite !');
+                    }
+                } else {
+                    \Yii::$app->getSession()->setFlash('error', 'Cette VM n\'est pas à vous !');
+                }
+            }
             return $this->render('index', [
-                'vmlist' => $vmlist,
+                        'vmlist' => $vmlist,
             ]);
         }
 
@@ -61,12 +84,11 @@ class SiteController extends Controller
             return $this->goBack();
         }
         return $this->render('login', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
-    public function actionLogin()
-    {
+    public function actionLogin() {
         if (!\Yii::$app->user->isGuest) {
             return $this->render('index');
         }
@@ -76,12 +98,11 @@ class SiteController extends Controller
             return $this->goBack();
         }
         return $this->render('login', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
-    public function actionLogout()
-    {
+    public function actionLogout() {
         Yii::$app->user->logout();
 
         return $this->goHome();
