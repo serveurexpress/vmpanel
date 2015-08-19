@@ -1,5 +1,6 @@
 <?php
 use kartik\icons\Icon;
+use kartik\widgets\SwitchInput;
 
 $this->title = 'VMpanel';
 ?>
@@ -8,17 +9,16 @@ $this->title = 'VMpanel';
         <?php
         $result = "";
         foreach ($vmlist as &$vm) {
-            $status = shell_exec('sudo '.Yii::$app->params['scriptDir'].'/status '.$vm);
-            \Yii::trace(\yii\helpers\ArrayHelper::toArray($status)); 
-            if (trim($status) == '1') {
-                $status = 'OK';
+            $status = trim(shell_exec('sudo '.Yii::$app->params['scriptDir'].'/status '.$vm));
+            if ($status == '1') {
+                $status = true;
             } else {
-                $status = 'KO';
+                $status = false;
             }
             $result = '
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">'.$status . ' '. ucfirst($vm).'</h3>
+                        <h3 class="panel-title"><label class="control-label">Status</label> '. SwitchInput::widget(['name'=>'status_1', 'value'=>$status]) . ucfirst($vm).'</h3>
                     </div>
                     <div class="panel-body">
                         Les graphs ici
