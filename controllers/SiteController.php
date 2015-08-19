@@ -53,18 +53,20 @@ class SiteController extends Controller {
                 if (in_array($vm, $vmlist)) {
                     switch ($action) {
                         case 'start':
+                            shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' lancée');
                             break;
-                        case 'pause':
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' en pause');
-                            break;
                         case 'stop':
+                            shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' arrêtée');
                             break;
                         case 'restart':
+                            shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
+                            shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' relancée');
                             break;
                         case 'fsck':
+                            shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm);
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' fsck lancée');
                             break;
                         default:
