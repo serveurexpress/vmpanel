@@ -22,6 +22,7 @@ $this->title = 'VMpanel';
                         <h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label> ' . SwitchInput::widget([
                         'name' => 'status_1',
                         'value' => $status,
+                        'disabled' => true,
                         'pluginOptions' => [
                             'size' => 'small',
                             'onColor' => 'success',
