@@ -27,7 +27,7 @@ $this->title = 'VMpanel';
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
-                $actionMenu = Html::textarea($vm.'ActionResult', 'Une action est en cours :', ['id' => $vm.'ActionResult', 'class' => 'form-control']);
+                $actionMenu = Html::textarea($vm.'ActionResult', 'Une action est en cours :', ['id' => $vm.'ActionResult', 'class' => 'form-control', 'rows' => '6']);
             }
             $result = '
                 <div class="panel panel-default">
