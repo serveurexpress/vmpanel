@@ -82,6 +82,7 @@ class SiteController extends Controller {
             }
             return $this->render('index', [
                         'vmlist' => $vmlist,
+                        'action' => null,
             ]);
         }
 
