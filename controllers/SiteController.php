@@ -63,7 +63,6 @@ class SiteController extends Controller {
                             break;
                         case 'restart':
                             shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm.' | sudo at now');
-//                            $output .= shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Redémarrage de la VM en cours');
                             break;
                         case 'fsck':
@@ -78,6 +77,7 @@ class SiteController extends Controller {
                 }
                 return $this->redirect(['index'], [
                             'vmlist' => $vmlist,
+                            'action' => $action,
                 ]);
             }
             return $this->render('index', [

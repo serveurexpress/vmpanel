@@ -48,8 +48,9 @@ vi /etc/sudoers
 '''Cmnd_Alias STARTVM=/home/kvm/istartVM
 Cmnd_Alias STOPVM=/home/kvm/stopVM
 Cmnd_Alias STATUSVM=/home/kvm/status
-Cmnd_Alias FSCKVM=/home/kvm/fsckVM'''
-www-data ALL= NOPASSWD: ADDSSH,VQLOG,VERSION,STARTVM,STOPVM,STATUSVM,FSCKVM
+Cmnd_Alias FSCKVM=/home/kvm/fsckVM
+Cmnd_Alias AT=/usr/bin/at
+www-data ALL= NOPASSWD: ADDSSH,VQLOG,VERSION,STARTVM,STOPVM,STATUSVM,FSCKVM,AT'''
 
 ## Update
 cd /home/vmpanel/

@@ -12,13 +12,19 @@ $this->title = 'VMpanel';
         foreach ($vmlist as &$vm) {
             $startStatus = '';
             $stopStatus = '';
-            $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStatus'] . ' ' . $vm));
+            $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
             if ($status == '1') {
                 $status = true;
                 $startStatus = 'disabled';
             } else {
                 $status = false;
                 $stopStatus = 'disabled';
+            }
+            if ($action != null) {
+                \Yii::trace(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action);
+                if (file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                    \Yii::trace(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action.' : EXIST');
+                }
             }
             $result = '
                 <div class="panel panel-default">
