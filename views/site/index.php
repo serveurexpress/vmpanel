@@ -26,7 +26,7 @@ $this->title = 'VMpanel';
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
-                $actionMenu = '';
+                $actionMenu = 'Une action est déja en cours : <br /><pre id="'.$vm.'ActionResult"></pre>';
             }
             $result = '
                 <div class="panel panel-default">
