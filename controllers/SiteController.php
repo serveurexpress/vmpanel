@@ -54,21 +54,20 @@ class SiteController extends Controller {
                     $output = '';
                     switch ($action) {
                         case 'start':
-                            $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
+                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm.' | sudo at now');
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
                             break;
                         case 'stop':
-                            $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
-                            \Yii::trace('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
+                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' | sudo at now');
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
                             break;
                         case 'restart':
-                            $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
-                            $output .= shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
+                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' | sudo at now');
+//                            $output .= shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
                             break;
                         case 'fsck':
-                            $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm);
+                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm.' | sudo at now');
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
                             break;
                         default:
