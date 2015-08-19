@@ -10,12 +10,17 @@ $this->title = 'VMpanel';
         <?php
         $result = "";
         foreach ($vmlist as &$vm) {
-            $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStatus'].' '.$vm));
-            \Yii::trace(\yii\helpers\ArrayHelper::toArray($status)); 
+            $startStatus = '';
+            $stopStatus = '';
+            $restartStatus = '';
+            $fsckStatus = '';
+            $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStatus'] . ' ' . $vm));
             if ($status == '1') {
                 $status = true;
+                $startStatus = 'disabled';
             } else {
                 $status = false;
+                $stopStatus = 'disabled';
             }
             $result = '
                 <div class="panel panel-default">
@@ -35,9 +40,8 @@ $this->title = 'VMpanel';
                         Les graphs ici
                     </div>
                     <div class="panel-footer">
-                       <a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer">' . Icon::show('play') . '</a>'
-//                    . '<a href="/index.php?vm='.$vm.'&action=pause" class="btn btn-default" title="Pause">'.Icon::show('pause').'</a>'
-                    . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter">' . Icon::show('stop') . '</a>'
+                       <a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
+                    . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer">' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck">' . Icon::show('search') . '</a>
                     </div>
