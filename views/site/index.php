@@ -9,6 +9,7 @@ $this->title = 'VMpanel';
         $result = "";
         foreach ($vmlist as &$vm) {
             $status = shell_exec(Yii::$app->params['scriptDir'].'/status '.$vm);
+            \Yii::trace(\yii\helpers\ArrayHelper::toArray($status)); 
             if (trim($status) == 'running') {
                 $status = 'OK';
             } else {
