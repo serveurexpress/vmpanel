@@ -59,6 +59,7 @@ class SiteController extends Controller {
                             break;
                         case 'stop':
                             $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
+                            \Yii::trace('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
                             \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' arrêtée : ' . nl2br($output));
                             break;
                         case 'restart':
