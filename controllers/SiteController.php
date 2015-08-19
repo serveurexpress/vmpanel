@@ -52,21 +52,30 @@ class SiteController extends Controller {
             if ($vm != null && $action != null && $vm != "" && $action != "" && isset($vm) && isset($action)) {
                 if (in_array($vm, $vmlist)) {
                     $output = '';
+                    $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
                     switch ($action) {
                         case 'start':
-                            if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' | sudo at now');
-                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Démarrage de la VM en cours');
+                            if ($status != '1') {
+                                if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                                    shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' | sudo at now');
+                                    \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Démarrage de la VM en cours');
+                                } else {
+                                    \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Démarrage de la VM déja en cours');
+                                }
                             } else {
-                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Démarrage de la VM déja en cours');
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : VM déja démarrée');
                             }
                             break;
                         case 'stop':
-                            if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' | sudo at now');
-                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Arret de la VM en cours');
+                            if ($status == '1') {
+                                if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                                    shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' | sudo at now');
+                                    \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Arret de la VM en cours');
+                                } else {
+                                    \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Arret de la VM déja en cours');
+                                }
                             } else {
-                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Arret de la VM déja en cours');
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : VM déja arrêtée');
                             }
                             break;
                         case 'restart':
