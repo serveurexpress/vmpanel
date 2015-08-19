@@ -44,6 +44,12 @@ git clone https://proj.alphaweb.fr/thomas/vmpanel.git
 cd /home/vmpanel/
 composer install
 chown -R www-data runtime && chown -R www-data web/assets/
+vi /etc/sudoers
+'''Cmnd_Alias STARTVM=/home/kvm/istartVM
+Cmnd_Alias STOPVM=/home/kvm/stopVM
+Cmnd_Alias STATUSVM=/home/kvm/status
+Cmnd_Alias FSCKVM=/home/kvm/fsckVM'''
+www-data ALL= NOPASSWD: ADDSSH,VQLOG,VERSION,STARTVM,STOPVM,STATUSVM,FSCKVM
 
 ## Update
 cd /home/vmpanel/

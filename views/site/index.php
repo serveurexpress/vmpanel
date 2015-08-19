@@ -8,7 +8,7 @@ $this->title = 'VMpanel';
         <?php
         $result = "";
         foreach ($vmlist as &$vm) {
-            $status = shell_exec(Yii::$app->params['scriptDir'].'/status '.$vm);
+            $status = shell_exec('sudo '.Yii::$app->params['scriptDir'].'/status '.$vm);
             \Yii::trace(\yii\helpers\ArrayHelper::toArray($status)); 
             if (trim($status) == '1') {
                 $status = 'OK';
