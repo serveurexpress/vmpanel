@@ -55,20 +55,20 @@ class SiteController extends Controller {
                     switch ($action) {
                         case 'start':
                             $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' lancée : '.$output);
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' lancée : '.nl2br($output));
                             break;
                         case 'stop':
                             $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' arrêtée : '.$output);
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' arrêtée : '.nl2br($output));
                             break;
                         case 'restart':
                             $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm);
                             $output .= shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' relancée : '.$output);
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' relancée : '.nl2br($output));
                             break;
                         case 'fsck':
                             $output = shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm);
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' fsck lancée : '.$output);
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm).' fsck lancée : '.nl2br($output));
                             break;
                         default:
                             \Yii::$app->getSession()->setFlash('error', 'Action interdite !');
