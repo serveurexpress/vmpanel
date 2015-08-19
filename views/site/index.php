@@ -2,6 +2,7 @@
 
 use kartik\icons\Icon;
 use kartik\widgets\SwitchInput;
+use yii\helpers\Html;
 
 $this->title = 'VMpanel';
 ?>
@@ -26,7 +27,7 @@ $this->title = 'VMpanel';
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
-                $actionMenu = 'Une action est déja en cours : <br /><pre id="'.$vm.'ActionResult"></pre>';
+                $actionMenu = Html::textarea($vm.'ActionResult', 'Une action est en cours : \r\n', ['id' => $vm.'ActionResult', 'class' => 'form-control']);
             }
             $result = '
                 <div class="panel panel-default">

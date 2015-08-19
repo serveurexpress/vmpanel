@@ -54,20 +54,36 @@ class SiteController extends Controller {
                     $output = '';
                     switch ($action) {
                         case 'start':
-                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm.' | sudo at now');
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Démarrage de la VM en cours');
+                            if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                                shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' | sudo at now');
+                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Démarrage de la VM en cours');
+                            } else {
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Démarrage de la VM déja en cours');
+                            }
                             break;
                         case 'stop':
-                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' | sudo at now');
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Arret de la VM en cours');
+                            if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                                shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' | sudo at now');
+                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Arret de la VM en cours');
+                            } else {
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Arret de la VM déja en cours');
+                            }
                             break;
                         case 'restart':
-                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm.' | sudo at now');
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Redémarrage de la VM en cours');
+                            if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                                shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' | sudo at now');
+                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Redémarrage de la VM en cours');
+                            } else {
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Redémarrage de la VM déja en cours');
+                            }
                             break;
                         case 'fsck':
-                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm.' | sudo at now');
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Fsck de la VM en cours');
+                            if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                                shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm . ' | sudo at now');
+                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Fsck de la VM en cours');
+                            } else {
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Fsck de la VM déja en cours');
+                            }
                             break;
                         default:
                             \Yii::$app->getSession()->setFlash('error', 'Action interdite !');
