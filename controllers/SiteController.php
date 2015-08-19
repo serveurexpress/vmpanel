@@ -74,7 +74,7 @@ class SiteController extends Controller {
                     \Yii::$app->getSession()->setFlash('error', 'Cette VM n\'est pas à vous !');
                 }
             }
-            return $this->render('index', [
+            return $this->redirect('index', [
                         'vmlist' => $vmlist,
             ]);
         }

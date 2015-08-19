@@ -3,13 +3,15 @@ mkdir /etc/vmpanel
 sqlite3 /etc/vmpanel/vmpanel.db
 
 apt-get install nginx php5-fpm
-vi /etc/nginx/sites-available/default
+vi /etc/nginx/sites-available/vmpanel
 
 server {
 	listen 8080 default_server;
 	listen [::]:8080 default_server;
 
-	root /var/www/vmpanel/web;
+	root /home/vmpanel/web;
+
+        index index.php;
 
 	server_name _;
 
@@ -30,20 +32,20 @@ server {
 	}
 }
 
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/vmpanel /etc/nginx/sites-enabled/vmpanel
 /etc/init.d/nginx restart
 
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 ## Install
-cd /var/www/
+cd /home/
 git clone https://proj.alphaweb.fr/thomas/vmpanel.git
-cd /var/www/vmpanel/
+cd /home/vmpanel/
 composer install
 chown -R www-data runtime && chown -R www-data web/assets/
 
 ## Update
-cd /var/www/vmpanel/
+cd /home/vmpanel/
 git pull
 composer update
