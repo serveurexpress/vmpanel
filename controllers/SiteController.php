@@ -54,21 +54,21 @@ class SiteController extends Controller {
                     $output = '';
                     switch ($action) {
                         case 'start':
-                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm.' | sudo at now');
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
+                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm.' | sudo at now');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Démarrage de la VM en cours');
                             break;
                         case 'stop':
-                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' | sudo at now');
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
+                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' | sudo at now');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Arret de la VM en cours');
                             break;
                         case 'restart':
-                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' | sudo at now');
+                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm.' && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm.' | sudo at now');
 //                            $output .= shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm);
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Redémarrage de la VM en cours');
                             break;
                         case 'fsck':
-                            $output = shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm.' | sudo at now');
-                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : <br />' . nl2br($output));
+                            shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm.' | sudo at now');
+                            \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Fsck de la VM en cours');
                             break;
                         default:
                             \Yii::$app->getSession()->setFlash('error', 'Action interdite !');
