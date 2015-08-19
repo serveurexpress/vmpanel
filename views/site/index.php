@@ -10,7 +10,7 @@ $this->title = 'VMpanel';
         <?php
         $result = "";
         foreach ($vmlist as &$vm) {
-            $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/status ' . $vm));
+            $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . '/ ' . Yii::$app->params['scriptStatus'].' '.$vm));
             if ($status == '1') {
                 $status = true;
             } else {
