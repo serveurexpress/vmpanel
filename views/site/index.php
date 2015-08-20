@@ -40,6 +40,7 @@ $this->title = 'VMpanel';
                 $actionMenu = '<div class="row hidden"><div class="col-md-12">' . $buttonMenu . '</div></div><br />';
                 $actionMenu .= '<div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', '', ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
             }
+            $imgIf = Yii::$app->params['muninDir'] . 'if_tap' . substr($vm, 1, -1) . '-day.png';
             $result = '
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -55,7 +56,7 @@ $this->title = 'VMpanel';
                     ]) . '</h3>
                     </div>
                     <div class="panel-body">
-                        Les graphs ici
+                        <img class="img-responsive" src="' . $imgIf . '">
                     </div>
                     <div class="panel-footer">
                        ' . $actionMenu . '

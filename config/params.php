@@ -11,4 +11,5 @@ return [
     'scriptFsck' => 'fsckVM',
     'actionDir' => '/home/kvm/vmaction/',
     'logDir' => '/home/kvm/log/',
+    'muninDir' => '/var/cache/munin/www/localdomain/localhost.localdomain/',
 ];
