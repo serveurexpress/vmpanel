@@ -69,6 +69,7 @@ class SiteController extends Controller {
                         case 'stop':
                             if ($status == '1') {
                                 if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
+                                    \Yii::trace('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err | sudo at now');
                                     shell_exec('echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err | sudo at now');
                                     \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Arret de la VM en cours');
                                 } else {
