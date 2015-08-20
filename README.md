@@ -2,7 +2,7 @@
 mkdir /etc/vmpanel
 sqlite3 /etc/vmpanel/vmpanel.db
 
-apt-get install nginx php5-fpm at sudo
+apt-get install nginx php5-fpm at sudo php5-curl
 vi /etc/nginx/sites-available/vmpanel
 
 server {
