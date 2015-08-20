@@ -25,16 +25,20 @@ $this->title = 'VMpanel';
             if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.log')) {
                 $log = file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.log');
             }
+            if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.err')) {
+                $err = file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.err');
+            }
             $buttonMenu = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             $actionMenu = '<div class="row"><div class="col-md-12">' . $buttonMenu . '</div></div><br />';
-            $actionMenu .= '<div class="row"><div class="col-md-12">' . Html::textarea($vm . 'ActionResult', "Dernières actions : \n" . $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
+            $actionMenu .= '<div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
+            $actionMenu .= '<div class="row"><div class="col-md-12"><label class="control-label">Dernières erreurs</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
                 $actionMenu = '<div class="row hidden"><div class="col-md-12">' . $buttonMenu . '</div></div><br />';
-                $actionMenu .= '<div class="row"><div class="col-md-12">' . Html::textarea($vm . 'ActionResult', 'Une action est en cours :', ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
+                $actionMenu .= '<div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', '', ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
             }
             $result = '
                 <div class="panel panel-default">
