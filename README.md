@@ -2,7 +2,7 @@
 mkdir /etc/vmpanel
 sqlite3 /etc/vmpanel/vmpanel.db
 
-apt-get install nginx php5-fpm
+apt-get install nginx php5-fpm at sudo
 vi /etc/nginx/sites-available/vmpanel
 
 server {
@@ -45,12 +45,12 @@ cd /home/vmpanel/
 composer install
 chown -R www-data runtime && chown -R www-data web/assets/
 vi /etc/sudoers
-'''Cmnd_Alias STARTVM=/home/kvm/istartVM
+Cmnd_Alias STARTVM=/home/kvm/istartVM
 Cmnd_Alias STOPVM=/home/kvm/stopVM
 Cmnd_Alias STATUSVM=/home/kvm/status
 Cmnd_Alias FSCKVM=/home/kvm/fsckVM
 Cmnd_Alias AT=/usr/bin/at
-www-data ALL= NOPASSWD: ADDSSH,VQLOG,VERSION,STARTVM,STOPVM,STATUSVM,FSCKVM,AT'''
+www-data ALL= NOPASSWD: ADDSSH,VQLOG,VERSION,STARTVM,STOPVM,STATUSVM,FSCKVM,AT
 
 ## Update
 cd /home/vmpanel/

@@ -10,4 +10,5 @@ return [
     'scriptStop' => 'stopVM',
     'scriptFsck' => 'fsckVM',
     'actionDir' => '/home/kvm/vmaction/',
+    'logDir' => '/home/kvm/log/',
 ];
