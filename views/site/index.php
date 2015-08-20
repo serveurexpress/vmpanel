@@ -21,13 +21,16 @@ $this->title = 'VMpanel';
                 $status = false;
                 $stopStatus = 'disabled';
             }
-            $actionMenu = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
+            $buttonMenu = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
+            $actionMenu = '<div class="row">' . $actionMenu . '</div>';
+            $actionMenu .= '<div class="row">'.Html::textarea($vm . 'ActionResult', 'Dernières actions :', ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']).'</div>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
-                $actionMenu = Html::textarea($vm.'ActionResult', 'Une action est en cours :', ['id' => $vm.'ActionResult', 'class' => 'form-control', 'rows' => '6']);
+                $actionMenu = '<div class="row hidden">' . $actionMenu . '</div>';
+                $actionMenu .= Html::textarea($vm . 'ActionResult', 'Une action est en cours :', ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']);
             }
             $result = '
                 <div class="panel panel-default">
