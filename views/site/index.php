@@ -14,6 +14,7 @@ $this->title = 'VMpanel';
             $startStatus = '';
             $stopStatus = '';
             $log = '';
+            $imgEth = '';
             $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
             if ($status == '1') {
                 $status = true;
@@ -44,6 +45,16 @@ $this->title = 'VMpanel';
             $imgEthWeekly = 'http://'.Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-weekly.png';
             $imgEthMonthly = 'http://'.Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-monthly.png';
             $imgEthYearly = 'http://'.Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-yearly.png';
+            if (file_exists($imgEthDaily)) {
+                $imgEth = '<div class="row">
+                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthDaily . '"></div>
+                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthWeekly . '"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthMonthly . '"></div>
+                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthYearly . '"></div>
+                    </div>';
+            }
             $result = '
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -59,14 +70,7 @@ $this->title = 'VMpanel';
                     ]) . '</h3>
                     </div>
                     <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthDaily . '"></div>
-                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthWeekly . '"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthMonthly . '"></div>
-                        <div class="col-md-6 col-lg-6"><img class="img-responsive" src="' . $imgEthYearly . '"></div>
-                    </div>
+                    '.$imgEth.'
                     </div>
                     <div class="panel-footer">
                        ' . $actionMenu . '
