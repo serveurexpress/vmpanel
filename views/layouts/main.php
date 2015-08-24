@@ -56,13 +56,6 @@ AppAsset::register($this);
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
-                <?php
-                echo AlertBlock::widget([
-                    'type' => AlertBlock::TYPE_ALERT,
-                    'useSessionFlash' => true,
-                    'delay' => false
-                ]);
-                ?>
                 <?= $content ?>
             </div>
         </div>
