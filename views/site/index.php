@@ -29,6 +29,7 @@ foreach ($vmlist as &$vm) {
     $stopStatus = '';
     $log = '';
     $imgEth = '';
+    $err = '';
     $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
     if ($status == '1') {
         $status = true;
