@@ -44,7 +44,7 @@ $this->title = 'VMpanel';
                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                             </div>
                           </div>';
-                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Action in progress</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
+                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Action in progress</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => 'ActionResult'.$vm, 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
                 $buttonsGraphLog = '<button id = "btnGraph' . $vm . '" type="button" class="btn btn-info hidden" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
                             </button>
@@ -52,7 +52,8 @@ $this->title = 'VMpanel';
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
                             </button>';
                 $this->registerJs('$(document).ready(function(){
-                    
+                        var textareaLog = document.getElementById("ActionResult'.$vm.'");
+                        textareaLog.scrollTop = textareaLog.scrollHeight;
                         intervalID' . $vm . ' = setInterval(function(){
                             if ($("#progress-' . $vm . '").length > 0) {
                                 $.pjax.reload({container:"#pjax-' . $vm . '"});
@@ -63,8 +64,8 @@ $this->title = 'VMpanel';
               });', View::POS_END);
             } else {
                 $buttonsMenu = '<div class="row">' . $buttons . '</div>';
-                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Last actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
-                        . '<div class="row"><div class="col-md-12"><label class="control-label">Last errors</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
+                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Last actions</label>' . Html::textarea('ActionResult'.$vm, $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
+                        . '<div class="row"><div class="col-md-12"><label class="control-label">Last errors</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => 'ActionResultErr'.$vm, 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
                 $buttonsGraphLog = '<button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
                             </button>
