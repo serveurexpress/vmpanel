@@ -133,8 +133,7 @@ $this->title = 'VMpanel';
                     .find("#modalGraphEthContent' . $vm . '")
                     .load("/site/ethgraph?vm=' . $vm . '");
                 });
-                var textareaLog = document.getElementById("ActionResult'.$vm.'");
-                textareaLog.scrollTop = textareaLog.scrollHeight;
+                document.getElementById("textarea").scrollTop = document.getElementById("textarea").scrollHeight;
               });', View::POS_END);
         }
         ?>
