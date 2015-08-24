@@ -51,9 +51,6 @@ $this->title = 'VMpanel';
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
-            $buttonsMenu = '<div class="row">' . $buttons . '</div>';
-            $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
-                    . '<div class="row"><div class="col-md-12"><label class="control-label">Dernières erreurs</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
             // Vérification si une action est en cours
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             // Une action est en cours
@@ -65,6 +62,12 @@ $this->title = 'VMpanel';
                             </div>
                           </div>';
                 $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
+                $buttonsGraphLog = '<button id = "btnGraph' . $vm . '" type="button" class="btn btn-info hidden" data-toggle="collapse" data-target="#graph' . $vm . '">
+                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
+                            </button>
+                            <button id = "btnLogs' . $vm . '" type="button" class="btn btn-default hidden" data-toggle="collapse" data-target="#logs' . $vm . '">
+                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
+                            </button>';
                 $this->registerJs('$(document).ready(function(){
                     
                         intervalID' . $vm . ' = setInterval(function(){
@@ -75,6 +78,16 @@ $this->title = 'VMpanel';
                             }
                         },2000);
               });', View::POS_END);
+            } else {
+                $buttonsMenu = '<div class="row">' . $buttons . '</div>';
+                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
+                        . '<div class="row"><div class="col-md-12"><label class="control-label">Dernières erreurs</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
+                $buttonsGraphLog = '<button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
+                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
+                            </button>
+                            <button id = "btnLogs' . $vm . '" type="button" class="btn btn-default" data-toggle="collapse" data-target="#logs' . $vm . '">
+                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
+                            </button>';
             }
             $imgEthDaily = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-daily.png';
             $imgEthWeekly = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-weekly.png';
@@ -95,18 +108,11 @@ $this->title = 'VMpanel';
                     <div class="panel-heading">
                         <div class="row">
                                 <div class="col-md-12">
-                                    <label class="control-label panel-title">' . ucfirst($vm) . '</label> 
+                                    <label class="control-label panel-title text-center">' . ucfirst($vm) . '</label> 
                                 </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                            <button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
-                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
-                            </button>
-                            <button id = "btnLogs' . $vm . '" type="button" class="btn btn-default" data-toggle="collapse" data-target="#logs' . $vm . '">
-                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
-                            </button>
-                            </div>
+                            <div class="col-md-4">' . $buttonsGraphLog . '</div>
                             <div class="col-md-4 text-center">' . $buttonsMenu . '</div>
                             <div class="col-md-4 text-right">' . $status . ' </div>
                             </div>
