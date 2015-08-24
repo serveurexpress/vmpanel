@@ -67,7 +67,7 @@ $this->title = 'VMpanel';
                           </div>';
                 $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
                 $this->registerJs('$(document).ready(function(){
-                    if ($("#progress-' . $vm . '").length > 0) {
+                    if ($(\'#progress-' . $vm . '\').length > 0) {
                         timeoutID' . $vm . ' = setTimeout(function(){
                             $.pjax.reload({container:"#pjax-' . $vm . '"});
                         },2000);
