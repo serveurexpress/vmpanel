@@ -33,7 +33,7 @@ $this->title = 'VMpanel';
             $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Start" ' . $startStatus . '>' . Icon::show('play') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Stop" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Reboot" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
-                    . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Chack disk" ' . $startStatus . '>' . Icon::show('search') . '</a>';
+                    . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Check disk" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             // Vérification si une action est en cours
             $nbAction = se::getAction($vm);
             // Une action est en cours
