@@ -77,7 +77,7 @@ $this->title = 'VMpanel';
                         <div class="row">
                             <div class="col-md-6">
                             <h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label>
-                            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph_' . $vm . '">
+                            <button id = "btnGraph'.$vm.'" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> Bande passante
                               </button></h3>  
                             </div>
@@ -94,7 +94,7 @@ $this->title = 'VMpanel';
                             </div>
                             </div>
                     </div>
-                    <div id="#graph_' . $vm . '" class="panel-body collapse">
+                    <div id="graph' . $vm . '" class="panel-body collapse">
                     ' . $imgEth . '
                     </div>
                     <div class="panel-footer">
@@ -103,11 +103,11 @@ $this->title = 'VMpanel';
                 </div>';
             echo $result;
             $this->registerJs('$(document).ready(function(){
-                $("#graph_' . $vm . '").on("hide.bs.collapse", function(){
-                  $(".btn").html(\'<span class="glyphicon glyphicon-collapse-down"></span> Open\');
+                $("#graph' . $vm . '").on("hide.bs.collapse", function(){
+                  $("#btnGraph'.$vm.'").html(\'<span class="glyphicon glyphicon-collapse-down"></span> Open\');
                 });
-                $("#graph_' . $vm . '").on("show.bs.collapse", function(){
-                  $(".btn").html(\'<span class="glyphicon glyphicon-collapse-up"></span> Close\');
+                $("#graph' . $vm . '").on("show.bs.collapse", function(){
+                  $("#btnGraph'.$vm.'").html(\'<span class="glyphicon glyphicon-collapse-up"></span> Close\');
                 });
               });', View::POS_END);
         }
