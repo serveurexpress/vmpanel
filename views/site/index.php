@@ -3,6 +3,7 @@
 use kartik\icons\Icon;
 use kartik\widgets\SwitchInput;
 use yii\helpers\Html;
+use yii\web\View;
 
 function checkRemoteFile($url) {
     $ch = curl_init();
