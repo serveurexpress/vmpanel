@@ -4,6 +4,7 @@ use kartik\icons\Icon;
 use kartik\widgets\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
+use yii\widgets\Pjax;
 
 function checkRemoteFile($url) {
     $ch = curl_init();
@@ -20,6 +21,7 @@ function checkRemoteFile($url) {
 }
 
 $this->title = 'VMpanel';
+Pjax::begin(['id' => 'pjax-index']);
 ?>
 <div class="site-index">
     <div class="body-content">
@@ -134,3 +136,6 @@ $this->title = 'VMpanel';
         ?>
     </div>
 </div>
+<?php
+Pjax::end();
+?>
