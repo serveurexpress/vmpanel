@@ -8,7 +8,6 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use kartik\icons\Icon;
 use kartik\helpers\Html;
-use kartik\widgets\AlertBlock;
 
 Icon::map($this);
 AppAsset::register($this);

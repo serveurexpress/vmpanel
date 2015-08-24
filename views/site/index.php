@@ -5,6 +5,7 @@ use kartik\widgets\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\Pjax;
+use kartik\widgets\AlertBlock;
 
 function checkRemoteFile($url) {
     $ch = curl_init();
