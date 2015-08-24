@@ -8,7 +8,7 @@ return [
     'scriptStatus' => 'status',
     'scriptStart' => 'istartVM',
     'scriptStop' => 'stopVM',
-    'scriptFsck' => 'fsckVM',
+    'scriptFsck' => 'ifsckVM',
     'actionDir' => '/home/kvm/vmaction/',
     'logDir' => '/home/kvm/log/',
     'rrdDir' => '/kvm/web/',
