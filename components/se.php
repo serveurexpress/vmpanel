@@ -21,9 +21,29 @@ class se extends Component {
             return false;
         }
     }
-    
+
     public function getStatus($vm) {
         return trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
+    }
+
+    public function getLog($vm) {
+        if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.log')) {
+            return file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.log');
+        } else {
+            return '';
+        }
+    }
+
+    public function getErr($vm) {
+        if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.err')) {
+            return file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.err');
+        } else {
+            return '';
+        }
+    }
+    
+    public function getAction($vm) {
+            return glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
     }
 
 }

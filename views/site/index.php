@@ -16,9 +16,10 @@ $this->title = 'VMpanel';
         foreach ($vmlist as &$vm) {
             $startStatus = '';
             $stopStatus = '';
-            $log = '';
+            $log = se::getLog($vm);
+            $err = se::getErr($vm);
             $imgEth = '';
-            $err = '';
+            
             $status = se::getStatus($vm);
             if ($status == '1') {
                 $status = '<i class="fa fa-power-off poweron"></i>';
@@ -27,20 +28,15 @@ $this->title = 'VMpanel';
                 $status = '<i class="fa fa-power-off poweroff"></i>';
                 $stopStatus = 'disabled';
             }
-            if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.log')) {
-                $log = file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.log');
-            }
-            if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.err')) {
-                $err = file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.err');
-            }
+            
             $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             // Vérification si une action est en cours
-            $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
+            $nbAction = getAction($vm);
             // Une action est en cours
-            if (count($list) > 0) {
+            if (count($nbAction) > 0) {
                 $buttonsMenu = '<div class="row hidden">' . $buttons . '</div>' .
                         ' <div class="progress">
                             <div id="progress-' . $vm . '" class="progress-bar progress-bar-striped active" role="progressbar"
