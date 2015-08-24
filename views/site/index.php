@@ -73,7 +73,7 @@ foreach ($vmlist as &$vm) {
     $result = '
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label> ' . SwitchInput::widget([
+                        <div class="row"><div class="col-md-6"><h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label></h3></div><div class="col-md-6">' . SwitchInput::widget([
                 'name' => 'status_1',
                 'value' => $status,
                 'disabled' => true,
@@ -82,7 +82,7 @@ foreach ($vmlist as &$vm) {
                     'onColor' => 'success',
                     'offColor' => 'danger',
                 ]
-            ]) . '</h3>
+            ]) . '</div></div>
                     </div>
                     <div class="panel-body">
                     ' . $imgEth . '
