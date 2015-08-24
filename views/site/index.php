@@ -67,13 +67,14 @@ $this->title = 'VMpanel';
                           </div>';
                 $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
                 $this->registerJs('$(document).ready(function(){
-                    if ($("#progress-' . $vm . '").length > 0) {
+                    
                         intervalID' . $vm . ' = setInterval(function(){
-                            $.pjax.reload({container:"#pjax-' . $vm . '"});
+                            if ($("#progress-' . $vm . '").length > 0) {
+                                $.pjax.reload({container:"#pjax-' . $vm . '"});
+                            } else {
+                                clearInterval(intervalID' . $vm . ');
+                            }
                         },2000);
-                    } else {
-                        clearInterval(intervalID' . $vm . ');
-                    }
               });', View::POS_END);
             }
             $imgEthDaily = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-daily.png';
