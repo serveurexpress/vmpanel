@@ -76,10 +76,10 @@ $this->title = 'VMpanel';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-6">
-                            <h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label></h3><br />
-                            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#graph_' . $vm . '">
+                            <h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label>
+                            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph_' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> Bande passante
-                              </button>    
+                              </button></h3>  
                             </div>
                             <div class="col-md-6 text-right">' . SwitchInput::widget([
                         'name' => 'status_1',
