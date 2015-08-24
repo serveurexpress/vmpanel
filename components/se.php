@@ -21,5 +21,9 @@ class se extends Component {
             return false;
         }
     }
+    
+    public function getStatus($vm) {
+        return trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
+    }
 
 }

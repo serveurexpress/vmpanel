@@ -19,7 +19,7 @@ $this->title = 'VMpanel';
             $log = '';
             $imgEth = '';
             $err = '';
-            $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
+            $status = se::getStatus($vm);
             if ($status == '1') {
                 $status = '<i class="fa fa-power-off poweron"></i>';
                 $startStatus = 'disabled';
