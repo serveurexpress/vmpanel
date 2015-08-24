@@ -75,7 +75,7 @@ $this->title = 'VMpanel';
             $imgEthDaily = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-daily.png';
             if (se::checkRemoteFile($imgEthDaily)) {
                 $imgEth = '<div class="row">
-                        <div class="col-md-12 col-lg-12"><a href="ethgraph?vm='.$vm.'"><img class="img-responsive" src="' . $imgEthDaily . '"></a></div>
+                        <div class="col-md-12 col-lg-12"><a href="#" id="imgEth"><img class="img-responsive" src="' . $imgEthDaily . '"></a></div>
                     </div>';
             }
             $result = '
@@ -115,17 +115,22 @@ $this->title = 'VMpanel';
             Modal::end();
             $this->registerJs('$(document).ready(function(){
                 $("#graph' . $vm . '").on("hide.bs.collapse", function(){
-                  $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('area-chart') . '\');
+                    $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('area-chart') . '\');
                 });
                 $("#graph' . $vm . '").on("show.bs.collapse", function(){
-                  $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-up"></span>  ' . Icon::show('area-chart') . '\');
+                    $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-up"></span>  ' . Icon::show('area-chart') . '\');
                 });
                 
                 $("#logs' . $vm . '").on("hide.bs.collapse", function(){
-                  $("#btnLogs' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('files-o') . '\');
+                    $("#btnLogs' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('files-o') . '\');
                 });
                 $("#logs' . $vm . '").on("show.bs.collapse", function(){
-                  $("#btnLogs' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-up"></span>  ' . Icon::show('files-o') . '\');
+                    $("#btnLogs' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-up"></span>  ' . Icon::show('files-o') . '\');
+                });
+                $( "#imgEth" ).click(function() {
+                    $("#modalGraphEth").modal("show")
+                    .find("#modalGraphEthContent")
+                    .load("/site/ethgraph?vm='.$vm.'");
                 });
               });', View::POS_END);
         }
