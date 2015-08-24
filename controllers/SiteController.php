@@ -137,4 +137,12 @@ class SiteController extends Controller {
         return $this->goHome();
     }
 
+    public function actionEthgraph($vm = null) {
+        if (!\Yii::$app->user->isGuest && $vm != null) {
+            return $this->render('ethgraph', [
+                        'vm' => $vm,
+            ]);
+        }
+    }
+
 }

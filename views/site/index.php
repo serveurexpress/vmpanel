@@ -1,7 +1,6 @@
 <?php
 
 use kartik\icons\Icon;
-use kartik\widgets\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\Pjax;
@@ -108,14 +107,14 @@ $this->title = 'VMpanel';
                     <div class="panel-heading">
                         <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <label class="control-label panel-title">' . ucfirst($vm) . '</label> 
+                                    <h4>' . ucfirst($vm) . '</h4> 
                                 </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">' . $buttonsGraphLog . '</div>
                             <div class="col-md-4 text-center">' . $buttonsMenu . '</div>
                             <div class="col-md-4 text-right">' . $status . ' </div>
-                            </div>
+                        </div>
                     </div>
                     <div id="graph' . $vm . '" class="panel-body collapse">
                     ' . $imgEth . '
