@@ -66,10 +66,9 @@ $this->title = 'VMpanel';
                             </div>
                           </div>';
                 $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
-                $this->registerJs('$("#pjax-' . $vm . '").on("pjax:end", function() {
-                    console.log("la");
+                $this->registerJs('$(document).ready(function(){
                         $.pjax.reload({container:"#pjax-' . $vm . '", timeout: 2000});
-                });', View::POS_END);
+              });', View::POS_END);
             }
             $imgEthDaily = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-daily.png';
             $imgEthWeekly = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-weekly.png';
