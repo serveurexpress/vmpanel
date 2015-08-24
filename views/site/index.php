@@ -135,6 +135,7 @@ $this->title = 'VMpanel';
                 });
                 var psconsole = $("#ActionResult'.$vm.'");
                 if(psconsole.length) {
+                console.log("la");
                     psconsole.scrollTop(psconsole[0].scrollHeight - psconsole.height());
                 }
               });', View::POS_END);
