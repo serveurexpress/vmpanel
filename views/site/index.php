@@ -108,7 +108,7 @@ $this->title = 'VMpanel';
             Modal::begin([
                 'id' => 'modalGraphEth',
                 'size' => Modal::SIZE_LARGE,
-                'header' => '<h3>Bande passante</h3>',
+                'header' => '<h3>Bande passante '.ucfirst($vm).'</h3>',
                 'toggleButton' => false,
             ]);
             echo '<div id="modalGraphEthContent"></div>';
