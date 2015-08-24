@@ -45,16 +45,16 @@ $this->title = 'VMpanel';
             if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.err')) {
                 $err = file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.err');
             }
-            $buttonMenu = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
+            $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
-            $actionMenu = '<div class="row">' . $buttonMenu . '</div>';
+            $buttonsMenu = '<div class="row">' . $buttons . '</div>';
             $actionMenu .= '<div id="logs' . $vm . '" class="collapse"><br /><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
                     . '<div class="row"><div class="col-md-12"><label class="control-label">Dernières erreurs</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
-                $actionMenu = '<div class="row hidden"><div class="col-md-12">' . $buttonMenu . '</div></div><br />';
+                $buttonsMenu = '<div class="row hidden">' . $buttons . '</div>';
                 $actionMenu .= '<div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', '', ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
             }
             $imgEthDaily = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-daily.png';
@@ -75,7 +75,7 @@ $this->title = 'VMpanel';
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                             <label class="control-label panel-title">' . ucfirst($vm) . '</label> 
                             <button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
@@ -84,7 +84,8 @@ $this->title = 'VMpanel';
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
                             </button>
                             </div>
-                            <div class="col-md-6 text-right">' . SwitchInput::widget([
+                            <div class="col-md-4 text-center">' . $buttonsMenu . '</div>
+                            <div class="col-md-4 text-right">' . SwitchInput::widget([
                         'name' => 'status_1',
                         'value' => $status,
                         'disabled' => true,
