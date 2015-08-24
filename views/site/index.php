@@ -34,7 +34,7 @@ $this->title = 'VMpanel';
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             // Vérification si une action est en cours
-            $nbAction = getAction($vm);
+            $nbAction = se::getAction($vm);
             // Une action est en cours
             if (count($nbAction) > 0) {
                 $buttonsMenu = '<div class="row hidden">' . $buttons . '</div>' .
