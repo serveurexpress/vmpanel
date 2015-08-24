@@ -12,5 +12,6 @@ return [
     'actionDir' => '/home/kvm/vmaction/',
     'logDir' => '/home/kvm/log/',
     'rrdDir' => '/kvm/web/',
-    'refreshDelay' => 5000,
+    //refreshDelay in millisecond
+    'refreshDelay' => 1000,
 ];
