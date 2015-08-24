@@ -49,15 +49,8 @@ $this->title = 'VMpanel';
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
-            $actionMenu = '<div class="row">'
-                    . '<div class="col-md-6">' . $buttonMenu . '</div>'
-                    . '<div class="col-md-6 text-right">'
-                    . '<button id = "btnLogs' . $vm . '" type="button" class="btn btn-default" data-toggle="collapse" data-target="#logs' . $vm . '">
-                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
-                            </button>
-                        </div>
-                        </div><br />';
-            $actionMenu .= '<div id="logs' . $vm . '" class="collapse"><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
+            $actionMenu = '<div class="row">' . $buttonMenu . '</div>';
+            $actionMenu .= '<div id="logs' . $vm . '" class="collapse"><br /><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
                     . '<div class="row"><div class="col-md-12"><label class="control-label">Dernières erreurs</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
@@ -86,6 +79,9 @@ $this->title = 'VMpanel';
                             <label class="control-label panel-title">' . ucfirst($vm) . '</label> 
                             <button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
+                            </button>
+                            <button id = "btnLogs' . $vm . '" type="button" class="btn btn-default" data-toggle="collapse" data-target="#logs' . $vm . '">
+                                <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
                             </button>
                             </div>
                             <div class="col-md-6 text-right">' . SwitchInput::widget([
