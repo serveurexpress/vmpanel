@@ -97,12 +97,14 @@ class SiteController extends Controller {
                         default:
                             \Yii::$app->getSession()->setFlash('error', 'Action interdite !');
                     }
+                    return $this->redirect(['index']);
                 } else {
                     \Yii::$app->getSession()->setFlash('error', 'Cette VM n\'est pas à vous !');
                 }
             }
-            return $this->redirect('index', [
-                        'vmlist' => $vmlist
+            return $this->render('index', [
+                        'vmlist' => $vmlist,
+                        'action' => $action,
             ]);
         }
 
