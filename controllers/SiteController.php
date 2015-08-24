@@ -7,7 +7,6 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller {
 
@@ -58,48 +57,48 @@ class SiteController extends Controller {
                             if ($status != '1') {
                                 if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
                                     shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
-                                    \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Démarrage de la VM en cours');
+                                    \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Start scheduled');
                                 } else {
-                                    \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Démarrage de la VM déja en cours');
+                                    \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Start already scheduled');
                                 }
                             } else {
-                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : VM déja démarrée');
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : VM already start');
                             }
                             break;
                         case 'stop':
                             if ($status == '1') {
                                 if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
                                     shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
-                                    \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Arret de la VM en cours');
+                                    \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Stop scheduled');
                                 } else {
-                                    \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Arret de la VM déja en cours');
+                                    \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Stop already scheduled');
                                 }
                             } else {
-                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : VM déja arrêtée');
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : VM already stop');
                             }
                             break;
                         case 'restart':
                             if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
                                 shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
-                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Redémarrage de la VM en cours');
+                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Reboot scheduled');
                             } else {
-                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Redémarrage de la VM déja en cours');
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Reboot already scheduled');
                             }
                             break;
                         case 'fsck':
                             if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
                                 shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
-                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Fsck de la VM en cours');
+                                \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Check disk scheduled');
                             } else {
-                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Fsck de la VM déja en cours');
+                                \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Check disk already scheduled');
                             }
                             break;
                         default:
-                            \Yii::$app->getSession()->setFlash('error', 'Action interdite !');
+                            \Yii::$app->getSession()->setFlash('error', 'Forbidden !');
                     }
                     return $this->redirect(['index']);
                 } else {
-                    \Yii::$app->getSession()->setFlash('error', 'Cette VM n\'est pas à vous !');
+                    \Yii::$app->getSession()->setFlash('error', 'This is not your VM !');
                 }
             }
             return $this->render('index', [

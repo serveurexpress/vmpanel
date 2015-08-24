@@ -30,10 +30,10 @@ $this->title = 'VMpanel';
                 $stopStatus = 'disabled';
             }
 
-            $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
-                    . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
-                    . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
-                    . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Fsck" ' . $startStatus . '>' . Icon::show('search') . '</a>';
+            $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Start" ' . $startStatus . '>' . Icon::show('play') . '</a>'
+                    . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Stop" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
+                    . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Reboot" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
+                    . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Chack disk" ' . $startStatus . '>' . Icon::show('search') . '</a>';
             // Vérification si une action est en cours
             $nbAction = se::getAction($vm);
             // Une action est en cours
@@ -44,7 +44,7 @@ $this->title = 'VMpanel';
                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                             </div>
                           </div>';
-                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
+                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer"><div class="row"><div class="col-md-12"><label class="control-label">Action in progress</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
                 $buttonsGraphLog = '<button id = "btnGraph' . $vm . '" type="button" class="btn btn-info hidden" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
                             </button>
@@ -63,8 +63,8 @@ $this->title = 'VMpanel';
               });', View::POS_END);
             } else {
                 $buttonsMenu = '<div class="row">' . $buttons . '</div>';
-                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
-                        . '<div class="row"><div class="col-md-12"><label class="control-label">Dernières erreurs</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
+                $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Last actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
+                        . '<div class="row"><div class="col-md-12"><label class="control-label">Last errors</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
                 $buttonsGraphLog = '<button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
                             </button>
@@ -108,7 +108,7 @@ $this->title = 'VMpanel';
             Modal::begin([
                 'id' => 'modalGraphEth' . $vm,
                 'size' => Modal::SIZE_LARGE,
-                'header' => '<h3>Bande passante ' . ucfirst($vm) . '</h3>',
+                'header' => '<h3>Bandwidth ' . ucfirst($vm) . '</h3>',
                 'toggleButton' => false,
             ]);
             echo '<div id="modalGraphEthContent' . $vm . '"></div>';
