@@ -107,8 +107,8 @@ $this->title = 'VMpanel';
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                                <div class="col-md-12">
-                                    <label class="control-label panel-title text-center">' . ucfirst($vm) . '</label> 
+                                <div class="col-md-12 text-center">
+                                    <label class="control-label panel-title">' . ucfirst($vm) . '</label> 
                                 </div>
                         </div>
                         <div class="row">
