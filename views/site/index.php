@@ -4,6 +4,7 @@ use kartik\icons\Icon;
 use kartik\widgets\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
+use yii\widgets\Pjax;
 
 function checkRemoteFile($url) {
     $ch = curl_init();
@@ -112,7 +113,9 @@ $this->title = 'VMpanel';
                     </div>
                     ' . $actionMenu . '
                 </div>';
+            Pjax::begin(['id' => 'pjax-'.$vm]);
             echo $result;
+            Pjax::end(['id' => 'pjax-'.$vm]);
             $this->registerJs('$(document).ready(function(){
                 $("#graph' . $vm . '").on("hide.bs.collapse", function(){
                   $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('area-chart') . '\');
