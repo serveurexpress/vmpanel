@@ -52,7 +52,7 @@ $this->title = 'VMpanel';
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('files-o') . '
                             </button>';
                 $this->registerJs('$(document).ready(function(){
-                        var textareaLog = document.getElementById("#ActionResult'.$vm.'");
+                        var textareaLog = document.getElementById("ActionResult'.$vm.'");
                         textareaLog.scrollTop = textareaLog.scrollHeight;
                         intervalID' . $vm . ' = setInterval(function(){
                             if ($("#progress-' . $vm . '").length > 0) {
