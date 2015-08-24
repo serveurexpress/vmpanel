@@ -76,12 +76,12 @@ $this->title = 'VMpanel';
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-6">
-                            <h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label></h3>  
-                            </div>
-                            <div class="col-md-6 text-right">
-                            <div class="row"><div class="col-md-6"><button id = "btnGraph'.$vm.'" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
+                            <h3 class="panel-title"><label class="control-label">' . ucfirst($vm) . '</label></h3>
+                            <button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
-                              </button></div><div class="col-md-6">' . SwitchInput::widget([
+                            </button>
+                            </div>
+                            <div class="col-md-6 text-right">' . SwitchInput::widget([
                         'name' => 'status_1',
                         'value' => $status,
                         'disabled' => true,
@@ -89,8 +89,11 @@ $this->title = 'VMpanel';
                             'size' => 'small',
                             'onColor' => 'success',
                             'offColor' => 'danger',
-                        ]
-                    ]) . '</div></div>
+                        ],
+                        'containerOptions' => [
+                            'class' => 'test',
+                        ],
+                    ]) . '
                             </div>
                             </div>
                     </div>
@@ -104,10 +107,10 @@ $this->title = 'VMpanel';
             echo $result;
             $this->registerJs('$(document).ready(function(){
                 $("#graph' . $vm . '").on("hide.bs.collapse", function(){
-                  $("#btnGraph'.$vm.'").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('area-chart') . '\');
+                  $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('area-chart') . '\');
                 });
                 $("#graph' . $vm . '").on("show.bs.collapse", function(){
-                  $("#btnGraph'.$vm.'").html(\'<span class="glyphicon glyphicon-collapse-up"></span>  ' . Icon::show('area-chart') . '\');
+                  $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-up"></span>  ' . Icon::show('area-chart') . '\');
                 });
               });', View::POS_END);
         }
