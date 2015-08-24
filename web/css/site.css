@@ -92,8 +92,10 @@ a.desc:after {
 
 .poweron {
     color: green;
+    font-size: 32px;
 }
 
 .poweroff {
     color: red;
+    font-size: 32px;
 }
