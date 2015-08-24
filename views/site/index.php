@@ -76,7 +76,7 @@ $this->title = 'VMpanel';
                             } else {
                                 clearInterval(intervalID' . $vm . ');
                             }
-                        },2000);
+                        },'.Yii::$app->params['refreshDelay'].');
               });', View::POS_END);
             } else {
                 $buttonsMenu = '<div class="row">' . $buttons . '</div>';
