@@ -1,9 +1,10 @@
 <?php
 
-use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
+use kartik\icons\Icon;
 use kartik\widgets\AlertBlock;
 use app\components\se;
 
@@ -19,7 +20,7 @@ $this->title = 'VMpanel';
             $log = se::getLog($vm);
             $err = se::getErr($vm);
             $imgEth = '';
-            
+
             $status = se::getStatus($vm);
             if ($status == '1') {
                 $status = '<i class="fa fa-power-off poweron"></i>';
@@ -28,7 +29,7 @@ $this->title = 'VMpanel';
                 $status = '<i class="fa fa-power-off poweroff"></i>';
                 $stopStatus = 'disabled';
             }
-            
+
             $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Démarrer" ' . $startStatus . '>' . Icon::show('play') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Arrêter" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
                     . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Relancer" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
@@ -58,7 +59,7 @@ $this->title = 'VMpanel';
                             } else {
                                 clearInterval(intervalID' . $vm . ');
                             }
-                        },'.Yii::$app->params['refreshDelay'].');
+                        },' . Yii::$app->params['refreshDelay'] . ');
               });', View::POS_END);
             } else {
                 $buttonsMenu = '<div class="row">' . $buttons . '</div>';
@@ -74,7 +75,7 @@ $this->title = 'VMpanel';
             $imgEthDaily = 'http://' . Yii::$app->params['hosterName'] . '.x1.fr' . Yii::$app->params['rrdDir'] . 'tap' . substr($vm, 1) . '-daily.png';
             if (se::checkRemoteFile($imgEthDaily)) {
                 $imgEth = '<div class="row">
-                        <div class="col-md-12 col-lg-12"><img class="img-responsive" src="' . $imgEthDaily . '"></div>
+                        <div class="col-md-12 col-lg-12"><a href="ethgraph.php"><img class="img-responsive" src="' . $imgEthDaily . '"></a></div>
                     </div>';
             }
             $result = '
@@ -104,6 +105,14 @@ $this->title = 'VMpanel';
             ]);
             echo $result;
             Pjax::end(['id' => 'pjax-' . $vm]);
+            Modal::begin([
+                'id' => 'modalGraphEth',
+                'size' => Modal::SIZE_LARGE,
+                'header' => '<h3>Bande passante</h3>',
+                'toggleButton' => false,
+            ]);
+            echo '<div id="modalGraphEthContent"></div>';
+            Modal::end();
             $this->registerJs('$(document).ready(function(){
                 $("#graph' . $vm . '").on("hide.bs.collapse", function(){
                   $("#btnGraph' . $vm . '").html(\'<span class="glyphicon glyphicon-collapse-down"></span>  ' . Icon::show('area-chart') . '\');

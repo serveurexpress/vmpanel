@@ -139,7 +139,7 @@ class SiteController extends Controller {
 
     public function actionEthgraph($vm = null) {
         if (!\Yii::$app->user->isGuest && $vm != null) {
-            return $this->render('ethgraph', [
+            return $this->renderPartial('_ethgraph', [
                         'vm' => $vm,
             ]);
         }
