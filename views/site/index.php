@@ -94,8 +94,12 @@ $this->title = 'VMpanel';
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
+                                <div class="col-md-12">
+                                    <label class="control-label panel-title">' . ucfirst($vm) . '</label> 
+                                </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
-                            <label class="control-label panel-title">' . ucfirst($vm) . '</label> 
                             <button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">
                                 <span class="glyphicon glyphicon-collapse-down"></span> ' . Icon::show('area-chart') . '
                             </button>
