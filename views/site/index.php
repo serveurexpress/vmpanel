@@ -57,7 +57,7 @@ $this->title = 'VMpanel';
                             </button>
                         </div>
                         </div><br />';
-            $actionMenu .= '<div id="#logs' . $vm . '" class="collapse"><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
+            $actionMenu .= '<div id="logs' . $vm . '" class="collapse"><div class="row"><div class="col-md-12"><label class="control-label">Dernières actions</label>' . Html::textarea($vm . 'ActionResult', $log, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
                     . '<div class="row"><div class="col-md-12"><label class="control-label">Dernières erreurs</label>' . Html::textarea($vm . 'ActionResult', $err, ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
             $list = glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
             if (count($list) > 0) {
