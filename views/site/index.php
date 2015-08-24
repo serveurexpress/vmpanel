@@ -57,8 +57,8 @@ $this->title = 'VMpanel';
                 $buttonsMenu = '<div class="row hidden">' . $buttons . '</div>'
                         . ' <div class="progress">
                             <div class="progress-bar progress-bar-striped active" role="progressbar"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                              0%
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:10%">
+                              10%
                             </div>
                           </div>';
                 $actionMenu = '<div class="row"><div class="col-md-12"><label class="control-label">Une action est en cours</label>' . Html::textarea($vm . 'ActionResult', '', ['id' => $vm . 'ActionResult', 'class' => 'form-control', 'rows' => '6']) . '</div></div>';
