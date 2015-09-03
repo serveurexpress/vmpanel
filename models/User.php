@@ -2,105 +2,25 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+class User extends \dektrium\user\models\User
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-    public $vmList;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'HiaPJIkbvs609drN',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-            'vmList' => ['t134', 't135'],
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'b5mf07Hl5xmGML5o',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-            'vmList' => ['t135'],
-        ],
-    ];
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
+    public function scenarios()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        $scenarios = parent::scenarios();
+        // add field to scenarios
+        $scenarios['create'][]   = 'vmlist';
+        $scenarios['update'][]   = 'vmlist';
+        $scenarios['register'][] = 'vmlist';
+        return $scenarios;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function rules()
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
+        $rules = parent::rules();
+        // add some rules
+        $rules['vmlistRequired'] = ['vmlist', 'required'];
+        $rules['vmlistLength']   = ['vmlist', 'string', 'max' => 255];
 
-        return null;
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param  string      $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param  string  $password password to validate
-     * @return boolean if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
+        return $rules;
     }
 }
