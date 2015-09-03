@@ -61,9 +61,9 @@ $config = [
             'modelMap' => [
                 'User' => 'app\models\User',
             ],
-//            'controllerMap' => [
-//                'registration' => 'app\controllers\user\RegistrationController',
-//            ],
+            'controllerMap' => [
+                'settings' => 'app\controllers\user\SettingsController',
+            ],
             'enableRegistration' => false,
             'enableConfirmation' => false,
             'enableUnconfirmedLogin' => false,
