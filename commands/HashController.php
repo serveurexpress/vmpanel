@@ -8,6 +8,7 @@
 namespace app\commands;
 
 use yii\console\Controller;
+use Yii;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -17,14 +18,14 @@ use yii\console\Controller;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class HelloController extends Controller
+class HashController extends Controller
 {
     /**
      * This command echoes what you have entered as the message.
      * @param string $message the message to be echoed.
      */
-    public function actionIndex($message = 'hello world')
+    public function actionIndex($password)
     {
-        echo $message . "\n";
+        echo Yii::$app->getSecurity()->generatePasswordHash($password);
     }
 }
