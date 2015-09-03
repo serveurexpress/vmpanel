@@ -1,9 +1,5 @@
 ## System
-mkdir /etc/vmpanel
-sqlite3 /etc/vmpanel/vmpanel.db
-chown -R www-data /etc/vmpanel/
-CREATE TABLE 'users' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'username' TEXT NOT NULL, 'password' TEXT NOT NULL, 'authKey' TEXT NOT NULL, 'accessToken' TEXT NOT NULL, 'vmList' TEXT)
-
+CREATE USER 'vmpanel'@'localhost' IDENTIFIED BY 'cvSvBGUvKRdECtfN';GRANT USAGE ON *.* TO 'vmpanel'@'localhost' IDENTIFIED BY '***' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `vmpanel`;GRANT ALL PRIVILEGES ON `vmpanel`.* TO 'vmpanel'@'localhost';
 apt-get install nginx php5-fpm at sudo php5-curl
 vi /etc/nginx/sites-available/vmpanel
 
