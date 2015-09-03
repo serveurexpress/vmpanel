@@ -1,6 +1,8 @@
 ## System
 mkdir /etc/vmpanel
 sqlite3 /etc/vmpanel/vmpanel.db
+chown -R www-data /etc/vmpanel/
+CREATE TABLE 'users' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'username' TEXT NOT NULL, 'password' TEXT NOT NULL, 'authKey' TEXT NOT NULL, 'accessToken' TEXT NOT NULL, 'vmList' TEXT)
 
 apt-get install nginx php5-fpm at sudo php5-curl
 vi /etc/nginx/sites-available/vmpanel
