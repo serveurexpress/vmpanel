@@ -46,7 +46,10 @@ class SiteController extends Controller {
 
     public function actionIndex($vm = null, $action = null) {
         if (!\Yii::$app->user->isGuest) {
-            $vmlist = explode(",", Yii::$app->user->identity->vmlist);
+            $vmlist = null;
+            if (Yii::$app->user->identity->vmlist != "" && !is_null(Yii::$app->user->identity->vmlist)) {
+                $vmlist = explode(",", Yii::$app->user->identity->vmlist);
+            }
 
             if ($vm != null && $action != null && $vm != "" && $action != "" && isset($vm) && isset($action)) {
                 if (in_array($vm, $vmlist)) {

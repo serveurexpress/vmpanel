@@ -15,7 +15,7 @@ $this->title = 'VMpanel';
         <?php
         $result = "";
         $nb_vm = count($vmlist);
-        if ($nb_vm >= 1) {
+        if (!is_null($vmlist)) {
             foreach ($vmlist as &$vm) {
                 $startStatus = '';
                 $stopStatus = '';
