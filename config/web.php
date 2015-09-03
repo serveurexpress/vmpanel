@@ -64,6 +64,10 @@ $config = [
             'controllerMap' => [
                 'registration' => 'app\controllers\user\RegistrationController',
             ],
+            'enableRegistration' => false,
+            'enableConfirmation' => false,
+            'enableUnconfirmedLogin' => false,
+            'confirmWithin' => 21600,
             'admins' => ['admin']
         ],
     ],
