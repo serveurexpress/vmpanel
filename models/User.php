@@ -18,7 +18,6 @@ class User extends \dektrium\user\models\User
     {
         $rules = parent::rules();
         // add some rules
-        $rules['vmlistRequired'] = ['vmlist', 'required'];
         $rules['vmlistLength']   = ['vmlist', 'string', 'max' => 255];
 
         return $rules;
