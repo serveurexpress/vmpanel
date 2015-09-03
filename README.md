@@ -16,7 +16,7 @@ server {
 	server_name _;
 
 	location / {
-		try_files $uri $uri/ /index.php?$args;
+		try_files $uri $uri/ /index.php$is_args$args;
 	}
 	
 	location ~ \.php$ {
@@ -27,7 +27,7 @@ server {
     		include fastcgi_params;
 	}
 
-	location ~ /\.ht {
+	location ~ /\.(ht|svn|git) {
 		deny all;
 	}
 }

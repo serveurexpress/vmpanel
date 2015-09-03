@@ -52,11 +52,16 @@ class SiteController extends Controller {
                 if (in_array($vm, $vmlist)) {
                     $output = '';
                     $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
+                    $startCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
+                    $stopCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
+                    $restartCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
+                    $fsckCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
                     switch ($action) {
                         case 'start':
                             if ($status != '1') {
                                 if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                    shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
+                                    \Yii::trace($startCmd);
+                                    shell_exec($startCmd);
                                     \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Start scheduled');
                                 } else {
                                     \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Start already scheduled');
@@ -68,7 +73,8 @@ class SiteController extends Controller {
                         case 'stop':
                             if ($status == '1') {
                                 if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                    shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
+                                    \Yii::trace($stopCmd);
+                                    shell_exec($stopCmd);
                                     \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Stop scheduled');
                                 } else {
                                     \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Stop already scheduled');
@@ -79,7 +85,8 @@ class SiteController extends Controller {
                             break;
                         case 'restart':
                             if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
+                                \Yii::trace($restartCmd);
+                                shell_exec($restartCmd);
                                 \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Reboot scheduled');
                             } else {
                                 \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Reboot already scheduled');
@@ -87,7 +94,8 @@ class SiteController extends Controller {
                             break;
                         case 'fsck':
                             if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                shell_exec('echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now');
+                                \Yii::trace($fsckCmd);
+                                shell_exec($fsckCmd);
                                 \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Check disk scheduled');
                             } else {
                                 \Yii::$app->getSession()->setFlash('error', ucfirst($vm) . ' : Check disk already scheduled');
