@@ -55,6 +55,7 @@ $config = [
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
+            'admins' => ['admin']
         ],
     ],
     'params' => $params,
