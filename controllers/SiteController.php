@@ -119,7 +119,7 @@ class SiteController extends Controller {
 //        if ($model->load(Yii::$app->request->post()) && $model->login()) {
 //            return $this->goBack();
 //        }
-        return $this->redirect(['login']);
+        return $this->redirect(['/login']);
     }
 
     public function actionLogin() {
