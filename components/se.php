@@ -27,8 +27,8 @@ class se extends Component {
     }
 
     public function getLog($vm) {
-        if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.log')) {
-            return file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.log');
+        if (file_exists(Yii::$app->params['logDir'] . '/' . $vm . '.last')) {
+            return file_get_contents(Yii::$app->params['logDir'] . '/' . $vm . '.last');
         } else {
             return '';
         }

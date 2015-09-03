@@ -52,10 +52,10 @@ class SiteController extends Controller {
                 if (in_array($vm, $vmlist)) {
                     $output = '';
                     $status = trim(shell_exec('sudo ' . Yii::$app->params['scriptDir'] . Yii::$app->params['scriptStatus'] . ' ' . $vm));
-                    $startCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
-                    $stopCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
-                    $restartCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
-                    $fsckCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.log 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
+                    $startCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.last 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
+                    $stopCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.last 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
+                    $restartCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStop'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.last 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err && echo sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptStart'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.last 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
+                    $fsckCmd = 'echo "sudo ' . Yii::$app->params['scriptDir'] . '/' . Yii::$app->params['scriptFsck'] . ' ' . $vm . ' 1> ' . Yii::$app->params['logDir'] . '/' . $vm . '.last 2> ' . Yii::$app->params['logDir'] . '/' . $vm . '.err" | sudo at now';
                     switch ($action) {
                         case 'start':
                             if ($status != '1') {
