@@ -61,6 +61,9 @@ $config = [
             'modelMap' => [
                 'User' => 'app\models\User',
             ],
+            'controllerMap' => [
+                'registration' => 'app\controllers\user\RegistrationController',
+            ],
             'admins' => ['admin']
         ],
     ],
