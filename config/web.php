@@ -63,6 +63,7 @@ $config = [
             ],
             'controllerMap' => [
                 'settings' => 'app\controllers\user\SettingsController',
+                'profile' => 'app\controllers\user\ProfileController',
             ],
             'enableRegistration' => false,
             'enableConfirmation' => false,
