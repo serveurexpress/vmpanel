@@ -1,6 +1,5 @@
 ## System
-CREATE USER 'vmpanel'@'localhost' IDENTIFIED BY 'cvSvBGUvKRdECtfN';GRANT USAGE ON *.* TO 'vmpanel'@'localhost' IDENTIFIED BY '***' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `vmpanel`;GRANT ALL PRIVILEGES ON `vmpanel`.* TO 'vmpanel'@'localhost';
-INSERT INTO `vmpanel`.`user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`) VALUES (NULL, 'admin', 'support@serveur-express.com', '$2y$13$UKX8bZZOnOHsoQxRTZm4MOn.F61lK1zMs5h.GSwXWTuPS/mqXRNua', REVERSE('lppgqpAuTIX1YT9sMk-Yig4QDGw7e8dd'), '1418745915', NULL, NULL, NULL, '1418745915', '1418745915', '0');
+CREATE USER 'vmpanel'@'localhost' IDENTIFIED BY 'cvSvBGUvKRdECtfN';GRANT USAGE ON *.* TO 'vmpanel'@'localhost' IDENTIFIED BY 'cvSvBGUvKRdECtfN' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `vmpanel`;GRANT ALL PRIVILEGES ON `vmpanel`.* TO 'vmpanel'@'localhost';
 apt-get install nginx php5-fpm at sudo php5-curl php5-intl
 vi /etc/nginx/sites-available/vmpanel
 
@@ -50,6 +49,7 @@ Cmnd_Alias STATUSVM=/home/kvm/status
 Cmnd_Alias FSCKVM=/home/kvm/fsckVM
 Cmnd_Alias AT=/usr/bin/at
 www-data ALL= NOPASSWD: ADDSSH,VQLOG,VERSION,STARTVM,STOPVM,STATUSVM,FSCKVM,AT
+mysql -u root -p < /home/vmpanel/sql/vmpanel.sql
 
 ## Update
 cd /home/vmpanel/

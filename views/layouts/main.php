@@ -34,9 +34,14 @@ AppAsset::register($this);
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+            $adminMenu = false;
+            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->username == 'admin') {
+                $adminMenu = true;
+            }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
+                    $adminMenu ? ['label' => 'Users Admin', 'url' => ['/user/admin']]:['label' => 'Contact Support', 'url' => ['/contact']],
                     Yii::$app->user->isGuest ?
                             ['label' => 'Login', 'url' => ['/site/login']] :
                             [
