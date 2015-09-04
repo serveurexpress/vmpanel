@@ -3,7 +3,7 @@
 return [
     'adminEmail' => 'support@serveur-express.com',
     'icon-framework' => 'fa',
-    'hosterName' => 't041',
+    'hosterName' => 't040',
     'scriptDir' => '/home/kvm/',
     'scriptStatus' => 'status',
     'scriptStart' => 'istartVM',
