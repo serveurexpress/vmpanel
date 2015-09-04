@@ -76,7 +76,7 @@ $this->title = 'VMpanel';
                         $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Disk already mount on another hoster : ' . ucfirst($hosterName) . '</div>';
                     } else {
                         if ((se::getLive($vm) == Yii::$app->params['hosterName']) && (se::getStatus($vm) != '1')) {
-                            $buttonsMenu = '<div class="row alert alert-danger"><i class="fa fa-exclamation-circle"></i> Error : VM not started</div><div class="row">' . $buttons . '</div>';
+                            $buttonsMenu = '<div class="row alert alert-danger"><i class="fa fa-exclamation-circle"></i> Error : VM fail to start</div><div class="row">' . $buttons . '</div>';
                         } else {
                             $buttonsMenu = '<div class="row">' . $buttons . '</div>';
                         }
