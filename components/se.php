@@ -55,6 +55,7 @@ class se extends Component {
     }
 
     public function getLive($vm) {
+        $hoster = null;
         foreach (glob(Yii::$app->params['liveDir'] . $vm . '-*') as $filename) {
             $pieces = explode("-", $filename);
             $hoster = $pieces[1];
@@ -71,6 +72,7 @@ class se extends Component {
     }
     
     public function getNet($vm) {
+        $hoster = null;
         foreach (glob(Yii::$app->params['netDir'] . $vm . '-*') as $filename) {
             $pieces = explode("-", $filename);
             $hoster = $pieces[1];
@@ -87,6 +89,7 @@ class se extends Component {
     }
     
     public function getMount($vm) {
+        $hoster = null;
         foreach (glob(Yii::$app->params['mountDir'] . $vm . '-*') as $filename) {
             $pieces = explode("-", $filename);
             $hoster = $pieces[1];
