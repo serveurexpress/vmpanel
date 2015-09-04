@@ -66,11 +66,11 @@ $this->title = 'VMpanel';
               });', View::POS_END);
                 } else {
                     if (se::isLive($vm)) {
-                        $buttonsMenu = '<div class="row">'.$vm.' already running on another hoster</div>';
+                        $buttonsMenu = '<div class="row alert alert-danger">Already running on another hoster</div>';
                     } elseif (se::isNet($vm)) {
-                        $buttonsMenu = '<div class="row">'.$vm.' network already running on another hoster</div>';
+                        $buttonsMenu = '<div class="row alert alert-danger">Network already running on another hoster</div>';
                     } elseif (se::isMount($vm)) {
-                        $buttonsMenu = '<div class="row">'.$vm.' disk already mount on another hoster</div>';
+                        $buttonsMenu = '<div class="row alert alert-danger">Disk already mount on another hoster</div>';
                     } else {
                         $buttonsMenu = '<div class="row">' . $buttons . '</div>';
                     }
