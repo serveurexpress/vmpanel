@@ -67,15 +67,19 @@ $this->title = 'VMpanel';
                 } else {
                     if (se::isLive($vm)) {
                         $hosterName = se::getLive($vm);
-                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Already running on another hoster : '.ucfirst($hosterName).'</div>';
+                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Already running on another hoster : ' . ucfirst($hosterName) . '</div>';
                     } elseif (se::isNet($vm)) {
                         $hosterName = se::getNet($vm);
-                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Network already running on another hoster : '.ucfirst($hosterName).'</div>';
+                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Network already running on another hoster : ' . ucfirst($hosterName) . '</div>';
                     } elseif (se::isMount($vm)) {
                         $hosterName = se::getMount($vm);
-                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Disk already mount on another hoster : '.ucfirst($hosterName).'</div>';
+                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Disk already mount on another hoster : ' . ucfirst($hosterName) . '</div>';
                     } else {
-                        $buttonsMenu = '<div class="row">' . $buttons . '</div>';
+                        if ((se::getLive($vm) == Yii::$app->params['hosterName']) && (se::getStatus($vm) != '1')) {
+                            $buttonsMenu = '<div class="row alert alert-danger"><i class="fa fa-exclamation-circle"></i> Error : VM not started</div><div class="row">' . $buttons . '</div>';
+                        } else {
+                            $buttonsMenu = '<div class="row">' . $buttons . '</div>';
+                        }
                     }
                     $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Last actions</label>' . Html::textarea('ActionResult' . $vm, $log, ['id' => 'ActionResult' . $vm, 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
                             . '<div class="row"><div class="col-md-12"><label class="control-label">Last errors</label>' . Html::textarea('ActionResultErr' . $vm, $err, ['id' => 'ActionResultErr' . $vm, 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
