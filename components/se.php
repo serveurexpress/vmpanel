@@ -55,7 +55,7 @@ class se extends Component {
     }
 
     public function isNet($vm) {
-        if (count(glob(Yii::$app->params['netDir'] . $vm . '-*')) > 0) {
+        if ((count(glob(Yii::$app->params['netDir'] . $vm . '-*')) > 0) && (count(glob(Yii::$app->params['netDir'] . $vm . '-' . Yii::$app->params['hosterName'])) == 0)) {
             return true;
         } else {
             return false;
@@ -63,7 +63,7 @@ class se extends Component {
     }
 
     public function isMount($vm) {
-        if (count(glob(Yii::$app->params['mountDir'] . $vm . '-*')) > 0) {
+        if ((count(glob(Yii::$app->params['mountDir'] . $vm . '-*')) > 0) && (count(glob(Yii::$app->params['mountDir'] . $vm . '-' . Yii::$app->params['hosterName'])) == 0)) {
             return true;
         } else {
             return false;
