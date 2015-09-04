@@ -1,8 +1,4 @@
 ## System
-mkdir /etc/vmpanel
-sqlite3 /etc/vmpanel/vmpanel.db
-chown -R www-data /etc/vmpanel/
-
 apt-get install nginx php5-fpm at sudo php5-curl php5-intl
 vi /etc/nginx/sites-available/vmpanel
 
@@ -52,7 +48,7 @@ Cmnd_Alias STATUSVM=/home/kvm/status
 Cmnd_Alias FSCKVM=/home/kvm/fsckVM
 Cmnd_Alias AT=/usr/bin/at
 www-data ALL= NOPASSWD: ADDSSH,VQLOG,VERSION,STARTVM,STOPVM,STATUSVM,FSCKVM,AT
-sqlite3 /etc/vmpanel/vmpanel.db < /home/vmpanel/sql/vmpanel.sql
+mysql -u root -p vmpanel < /home/vmpanel/sql/vmpanel_mysql.sql
 
 ## Update
 cd /home/vmpanel/

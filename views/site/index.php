@@ -26,16 +26,16 @@ $this->title = 'VMpanel';
                 $status = se::getStatus($vm);
                 if ($status == '1') {
                     $status = '<i class="fa fa-power-off poweron"></i>';
-                    $startStatus = 'disabled';
+                    $startStatus = ' disabled';
                 } else {
                     $status = '<i class="fa fa-power-off poweroff"></i>';
-                    $stopStatus = 'disabled';
+                    $stopStatus = ' disabled';
                 }
 
-                $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default" title="Start" ' . $startStatus . '>' . Icon::show('play') . '</a>'
-                        . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default" title="Stop" ' . $stopStatus . '>' . Icon::show('stop') . '</a>'
-                        . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default" title="Reboot" ' . $stopStatus . '>' . Icon::show('refresh') . '</a>'
-                        . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default" title="Check disk" ' . $startStatus . '>' . Icon::show('search') . '</a>';
+                $buttons = '<a href="/index.php?vm=' . $vm . '&action=start" class="btn btn-default' . $startStatus . '" title="Start">' . Icon::show('play') . '</a>'
+                        . '<a href="/index.php?vm=' . $vm . '&action=stop" class="btn btn-default' . $stopStatus . '" title="Stop">' . Icon::show('stop') . '</a>'
+                        . '<a href="/index.php?vm=' . $vm . '&action=restart" class="btn btn-default' . $stopStatus . '" title="Reboot">' . Icon::show('refresh') . '</a>'
+                        . '<a href="/index.php?vm=' . $vm . '&action=fsck" class="btn btn-default' . $startStatus . '" title="Check disk">' . Icon::show('search') . '</a>';
                 // Vérification si une action est en cours
                 $nbAction = se::getAction($vm);
                 // Une action est en cours
