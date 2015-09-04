@@ -15,7 +15,7 @@ DROP TABLE "user";
 -- Table structure for user
 ----
 CREATE TABLE `user` (
-`id` int(11) NOT NULL PRIMARY KEY,
+`id` int(11) NOT NULL PRIMARY KEY AUTOINCREMENT,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password_hash` varchar(60) NOT NULL,
