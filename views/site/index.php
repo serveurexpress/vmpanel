@@ -67,13 +67,13 @@ $this->title = 'VMpanel';
                 } else {
                     if (se::isLive($vm)) {
                         $hosterName = se::getLive($vm);
-                        $buttonsMenu = '<div class="row alert alert-danger">Already running on another hoster : '.ucfirst($hosterName).'</div>';
+                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Already running on another hoster : '.ucfirst($hosterName).'</div>';
                     } elseif (se::isNet($vm)) {
                         $hosterName = se::getNet($vm);
-                        $buttonsMenu = '<div class="row alert alert-danger">Network already running on another hoster : '.ucfirst($hosterName).'</div>';
+                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Network already running on another hoster : '.ucfirst($hosterName).'</div>';
                     } elseif (se::isMount($vm)) {
                         $hosterName = se::getMount($vm);
-                        $buttonsMenu = '<div class="row alert alert-danger">Disk already mount on another hoster : '.ucfirst($hosterName).'</div>';
+                        $buttonsMenu = '<div class="row alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Disk already mount on another hoster : '.ucfirst($hosterName).'</div>';
                     } else {
                         $buttonsMenu = '<div class="row">' . $buttons . '</div>';
                     }

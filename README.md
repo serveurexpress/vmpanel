@@ -34,6 +34,7 @@ ln -s /etc/nginx/sites-available/vmpanel /etc/nginx/sites-enabled/vmpanel
 
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
+composer global require "fxp/composer-asset-plugin:~1.0.3"
 
 ## Install
 cd /home/
