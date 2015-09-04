@@ -10,6 +10,9 @@ return [
     'scriptStop' => 'stopVM',
     'scriptFsck' => 'ifsckVM',
     'actionDir' => '/home/kvm/vmaction/',
+    'liveDir' => '/home/kvm/vmlive/',
+    'netDir' => '/home/kvm/vmnet/',
+    'mountDir' => '/home/kvm/vmmount/',
     'logDir' => '/home/kvm/log/',
     'rrdDir' => '/kvm/web/',
     //refreshDelay in millisecond

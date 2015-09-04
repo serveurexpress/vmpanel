@@ -65,7 +65,15 @@ $this->title = 'VMpanel';
                         },' . Yii::$app->params['refreshDelay'] . ');
               });', View::POS_END);
                 } else {
-                    $buttonsMenu = '<div class="row">' . $buttons . '</div>';
+                    if (se::isLive($vm)) {
+                        $buttonsMenu = '<div class="row">'.$vm.' already running on another hoster</div>';
+                    } elseif (se::isNet($vm)) {
+                        $buttonsMenu = '<div class="row">'.$vm.' network already running on another hoster</div>';
+                    } elseif (se::isMount($vm)) {
+                        $buttonsMenu = '<div class="row">'.$vm.' disk already mount on another hoster</div>';
+                    } else {
+                        $buttonsMenu = '<div class="row">' . $buttons . '</div>';
+                    }
                     $actionMenu = '<div id="logs' . $vm . '" class="panel-footer collapse"><div class="row"><div class="col-md-12"><label class="control-label">Last actions</label>' . Html::textarea('ActionResult' . $vm, $log, ['id' => 'ActionResult' . $vm, 'class' => 'form-control', 'rows' => '6']) . '</div></div>'
                             . '<div class="row"><div class="col-md-12"><label class="control-label">Last errors</label>' . Html::textarea('ActionResultErr' . $vm, $err, ['id' => 'ActionResultErr' . $vm, 'class' => 'form-control', 'rows' => '6']) . '</div></div></div>';
                     $buttonsGraphLog = '<button id = "btnGraph' . $vm . '" type="button" class="btn btn-info" data-toggle="collapse" data-target="#graph' . $vm . '">

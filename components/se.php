@@ -45,5 +45,29 @@ class se extends Component {
     public function getAction($vm) {
             return glob(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-*');
     }
+    
+    public function isLive($vm) {
+            if (count(glob(Yii::$app->params['liveDir'] . $vm . '-*')) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+    }
+    
+    public function isNet($vm) {
+            if (count(glob(Yii::$app->params['netDir'] . $vm . '-*')) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+    }
+    
+    public function isMount($vm) {
+            if (count(glob(Yii::$app->params['mountDir'] . $vm . '-*')) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+    }
 
 }

@@ -63,7 +63,7 @@ class SiteController extends Controller {
                         case 'start':
                             if ($status != '1') {
                                 if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                    \Yii::trace($startCmd);
+//                                    \Yii::trace($startCmd);
                                     shell_exec($startCmd);
                                     \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Start scheduled');
                                 } else {
@@ -76,7 +76,7 @@ class SiteController extends Controller {
                         case 'stop':
                             if ($status == '1') {
                                 if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                    \Yii::trace($stopCmd);
+//                                    \Yii::trace($stopCmd);
                                     shell_exec($stopCmd);
                                     \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Stop scheduled');
                                 } else {
@@ -88,7 +88,7 @@ class SiteController extends Controller {
                             break;
                         case 'restart':
                             if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                \Yii::trace($restartCmd);
+//                                \Yii::trace($restartCmd);
                                 shell_exec($restartCmd);
                                 \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Reboot scheduled');
                             } else {
@@ -97,7 +97,7 @@ class SiteController extends Controller {
                             break;
                         case 'fsck':
                             if (!file_exists(Yii::$app->params['actionDir'] . $vm . '-' . Yii::$app->params['hosterName'] . '-' . $action)) {
-                                \Yii::trace($fsckCmd);
+//                                \Yii::trace($fsckCmd);
                                 shell_exec($fsckCmd);
                                 \Yii::$app->getSession()->setFlash('success', ucfirst($vm) . ' : Check disk scheduled');
                             } else {
@@ -125,25 +125,25 @@ class SiteController extends Controller {
         return $this->redirect(['/login']);
     }
 
-    public function actionLogin() {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->render('index');
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-                    'model' => $model,
-        ]);
-    }
-
-    public function actionLogout() {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
+//    public function actionLogin() {
+//        if (!\Yii::$app->user->isGuest) {
+//            return $this->render('index');
+//        }
+//
+//        $model = new LoginForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+//            return $this->goBack();
+//        }
+//        return $this->render('login', [
+//                    'model' => $model,
+//        ]);
+//    }
+//
+//    public function actionLogout() {
+//        Yii::$app->user->logout();
+//
+//        return $this->goHome();
+//    }
 
     public function actionEthgraph($vm = null) {
         if (!\Yii::$app->user->isGuest && $vm != null) {
