@@ -54,12 +54,28 @@ class se extends Component {
         }
     }
 
+    public function getLive($vm) {
+        foreach (glob(Yii::$app->params['liveDir'] . $vm . '-*') as $filename) {
+            $pieces = explode("-", $filename);
+            $hoster = $pieces[1];
+        }
+        return $hoster;
+    }
+
     public function isNet($vm) {
         if ((count(glob(Yii::$app->params['netDir'] . $vm . '-*')) > 0) && (count(glob(Yii::$app->params['netDir'] . $vm . '-' . Yii::$app->params['hosterName'])) == 0)) {
             return true;
         } else {
             return false;
         }
+    }
+    
+    public function getNet($vm) {
+        foreach (glob(Yii::$app->params['netDir'] . $vm . '-*') as $filename) {
+            $pieces = explode("-", $filename);
+            $hoster = $pieces[1];
+        }
+        return $hoster;
     }
 
     public function isMount($vm) {
@@ -68,6 +84,14 @@ class se extends Component {
         } else {
             return false;
         }
+    }
+    
+    public function getMount($vm) {
+        foreach (glob(Yii::$app->params['mountDir'] . $vm . '-*') as $filename) {
+            $pieces = explode("-", $filename);
+            $hoster = $pieces[1];
+        }
+        return $hoster;
     }
 
 }
