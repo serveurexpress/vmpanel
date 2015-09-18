@@ -139,11 +139,11 @@ class SiteController extends Controller {
 //        ]);
 //    }
 //
-//    public function actionLogout() {
-//        Yii::$app->user->logout();
-//
-//        return $this->goHome();
-//    }
+    public function actionLogout() {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
+    }
 
     public function actionEthgraph($vm = null) {
         if (!\Yii::$app->user->isGuest && $vm != null) {
