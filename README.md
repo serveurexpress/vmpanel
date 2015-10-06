@@ -38,7 +38,7 @@ composer global require "fxp/composer-asset-plugin:~1.0.3"
 
 ## Install
 cd /home/
-git clone https://proj.alphaweb.fr/thomas/vmpanel.git
+git clone https://github.com/serveurexpress/vmpanel.git
 cd /home/vmpanel/
 composer install
 chown -R www-data runtime && chown -R www-data web/assets/
