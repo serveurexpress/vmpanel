@@ -41,7 +41,7 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    $adminMenu ? ['label' => 'Users Admin', 'url' => ['/user/admin']]:['label' => 'Contact Support', 'url' => ['/contact']],
+                    $adminMenu ? ['label' => 'Users Admin', 'url' => ['/user/admin']]:['label' => 'Contact Support', 'url' => 'mailto:support@serveur-express.com'],
                     Yii::$app->user->isGuest ?
                             ['label' => 'Login', 'url' => ['/site/login']] :
                             [
